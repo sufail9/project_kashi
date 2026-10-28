@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Project Kashi | Banking Made Simple</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+    <div class="container nav-content">
+
+        <a href="/" class="logo">Project <span>Kashi.</span></a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/register">Customers</a>
+            <a href="{{ url_for('open_account') }}">Open Account</a>
+            <a href="/register" class="btn btn-primary">Register Customer</a>
+            <a href="{{ url_for('view_customers') }}" class="btn">View Customers</a>
+            <a href="{{ url_for('deposit_money') }}" class="btn"> Deposit Money</a>
+            <a href="{{ url_for('withdraw_money') }}" class="btn">Withdraw Money</a>
+            <a href="{{ url_for('transaction_history') }}" class="btn">Transaction History</a>
+            <a href="{{ url_for('account_details') }}" class="btn">Account Details</a>
+            <a href="{{ url_for('customer_details') }}" class="btn">Customer Details</a>
+            <a href="{{ url_for('dashboard') }}" class="btn">📊 Dashboard</a>
+        </div>
+
+    </div>
+</nav>
+
+<main class="container">
+
+    <section class="hero">
+        <span class="hero-label">WELCOME TO PROJECT KASHI</span>
+
+        <h1>Banking made simple.<br>Built for everyday life.</h1>
+
+        <p>
+            A simple banking management system to organise customer
+            information, manage accounts, and track transactions.
+        </p>
+
+        <a href="/register" class="btn btn-accent">
+            Register a Customer →
+        </a>
+    </section>
+
+    <section class="section">
+
+        <div class="section-heading">
+            <div>
+                <h2>Dashboard Overview</h2>
+                <p>Your banking system at a glance</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">♙</div>
+                <p>Total Customers</p>
+                <h3>Connected soon</h3>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">▣</div>
+                <p>Total Accounts</p>
+                <h3>Coming soon</h3>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">↔</div>
+                <p>Total Transactions</p>
+                <h3>Coming soon</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <div class="section-heading">
+            <div>
+                <h2>Quick Actions</h2>
+                <p>Choose what you want to do</p>
+            </div>
+        </div>
+
+        <div class="actions-grid">
+
+            <a href="/register" class="action-card">
+                <div class="action-icon">♙</div>
+                <h3>Register Customer</h3>
+                <p>Add customer information</p>
+            </a>
+
+            <a href="/open-account" class="action-card">
+                <div class="action-icon">▣</div>
+                <h3>Open Account</h3>
+                <p>Create a bank account</p>
+            </a>
+
+            <a href="/deposit" class="action-card">
+                <div class="action-icon">＋</div>
+                <h3>Deposit Money</h3>
+                <p>Add money to an account</p>
+            </a>
+
+            <a href="/transactions" class="action-card">
+                <div class="action-icon">↗</div>
+                <h3>Transactions</h3>
+                <p>View account activity</p>
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 Project Kashi | Educational Banking Project</p>
+        
+    </footer>
+
+</main>
+
+
+</body>
+</html>

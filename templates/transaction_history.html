@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - Project Kashi</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #0f766e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #115e59;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #0f172a;
+            color: white;
+        }
+
+        .deposit {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .withdrawal {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .message {
+            padding: 12px;
+            background: #fef3c7;
+            border-radius: 6px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #0f766e;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Project Kashi</h1>
+    <p>Transaction History</p>
+</header>
+
+<div class="container">
+
+    <h2>View Transactions</h2>
+    <p>Enter an Account ID to view its transaction history.</p>
+
+    <form method="GET" action="{{ url_for('transaction_history') }}">
+        <input
+            type="number"
+            name="account_id"
+            min="1"
+            placeholder="Enter Account ID"
+            value="{{ account_id or '' }}"
+            required
+        >
+        <button type="submit">View History</button>
+    </form>
+
+    {% if searched %}
+
+        {% if transactions %}
+            <h3>Transactions for Account ID: {{ account_id }}</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.TransactionID }}</td>
+
+                            <td>
+                                {% if transaction.TransactionType == 'DEPOSIT' %}
+                                    <span class="deposit">DEPOSIT</span>
+                                {% elif transaction.TransactionType == 'WITHDRAWAL' %}
+                                    <span class="withdrawal">WITHDRAWAL</span>
+                                {% else %}
+                                    {{ transaction.TransactionType }}
+                                {% endif %}
+                            </td>
+
+                            <td>₹{{ "%.2f"|format(transaction.Amount) }}</td>
+                            <td>{{ transaction.TransactionDate }}</td>
+                            <td>{{ transaction.Description or '-' }}</td>
+                            <td>{{ transaction.TransactionStatus }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        {% else %}
+            <p class="message">
+                No transactions found for this account.
+            </p>
+        {% endif %}
+
+    {% endif %}
+
+    <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+</div>
+
+</body>
+</html>

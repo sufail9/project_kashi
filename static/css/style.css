@@ -1,0 +1,321 @@
+/* ===== Project Kashi: Minimal Banking Design ===== */
+
+:root {
+--navy: #142b4a;
+--teal: #0d9488;
+--teal-dark: #0f766e;
+--background: #f4f7fb;
+--white: #ffffff;
+--text: #243247;
+--muted: #718096;
+--border: #e3e9f1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: "Segoe UI", Arial, sans-serif;
+background: var(--background);
+color: var(--text);
+line-height: 1.6;
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.container {
+width: min(1120px, 90%);
+margin: 0 auto;
+}
+
+/* Navigation */
+
+.navbar {
+background: var(--white);
+border-bottom: 1px solid var(--border);
+padding: 18px 0;
+}
+
+.nav-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+}
+
+.logo {
+font-size: 25px;
+font-weight: 750;
+color: var(--navy);
+white-space: nowrap;
+}
+
+.logo span {
+color: var(--teal);
+}
+
+.nav-links {
+display: flex;
+align-items: center;
+gap: 25px;
+flex-wrap: wrap;
+}
+
+.nav-links a {
+color: var(--text);
+font-size: 14px;
+font-weight: 600;
+transition: color 0.2s;
+}
+
+.nav-links a:hover {
+color: var(--teal);
+}
+
+/* Buttons */
+
+.btn {
+display: inline-block;
+padding: 11px 19px;
+border-radius: 8px;
+font-size: 14px;
+font-weight: 650;
+transition: 0.2s ease;
+}
+
+.btn-primary {
+background: var(--navy);
+color: var(--white) !important;
+}
+
+.btn-primary:hover {
+background: #203e65;
+}
+
+.btn-accent {
+background: var(--teal);
+color: var(--white);
+margin-top: 10px;
+}
+
+.btn-accent:hover {
+background: var(--teal-dark);
+transform: translateY(-2px);
+}
+
+/* Welcome section */
+
+.hero {
+margin-top: 34px;
+padding: 65px 55px;
+border-radius: 18px;
+color: var(--white);
+background: linear-gradient(120deg, #142b4a, #214e68);
+position: relative;
+overflow: hidden;
+}
+
+.hero::after {
+content: "";
+position: absolute;
+width: 260px;
+height: 260px;
+border: 45px solid rgba(255, 255, 255, 0.06);
+border-radius: 50%;
+right: -70px;
+top: -90px;
+pointer-events: none;
+}
+
+.hero-label {
+display: inline-block;
+color: #8ee4d7;
+font-size: 12px;
+font-weight: 750;
+letter-spacing: 2px;
+margin-bottom: 17px;
+}
+
+.hero h1 {
+font-size: clamp(32px, 4vw, 47px);
+line-height: 1.2;
+margin-bottom: 18px;
+letter-spacing: -1px;
+}
+
+.hero p {
+max-width: 600px;
+color: #dce6f0;
+font-size: 16px;
+margin-bottom: 22px;
+}
+
+/* Sections */
+
+.section {
+margin-top: 38px;
+}
+
+.section-heading {
+margin-bottom: 20px;
+}
+
+.section-heading h2 {
+color: var(--navy);
+font-size: 23px;
+margin-bottom: 4px;
+}
+
+.section-heading p {
+color: var(--muted);
+font-size: 14px;
+}
+
+/* Dashboard cards */
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 20px;
+}
+
+.stat-card {
+background: var(--white);
+padding: 25px;
+border: 1px solid var(--border);
+border-radius: 13px;
+box-shadow: 0 4px 15px rgba(20, 43, 74, 0.035);
+}
+
+.stat-icon,
+.action-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 45px;
+height: 45px;
+border-radius: 11px;
+background: #e2f5f2;
+color: var(--teal-dark);
+font-size: 22px;
+margin-bottom: 16px;
+}
+
+.stat-card p {
+color: var(--muted);
+font-size: 14px;
+margin-bottom: 6px;
+}
+
+.stat-card h3 {
+color: var(--navy);
+font-size: 19px;
+}
+
+/* Quick actions */
+
+.actions-grid {
+display: grid;
+grid-template-columns: repeat(4, minmax(0, 1fr));
+gap: 18px;
+}
+
+.action-card {
+display: block;
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: 13px;
+padding: 22px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 10px 25px rgba(20, 43, 74, 0.08);
+border-color: #b9e6df;
+}
+
+.action-card h3 {
+color: var(--navy);
+font-size: 16px;
+margin-bottom: 6px;
+}
+
+.action-card p {
+color: var(--muted);
+font-size: 13px;
+}
+
+.action-icon {
+width: 40px;
+height: 40px;
+font-size: 20px;
+margin-bottom: 14px;
+}
+
+/* Footer */
+
+.footer {
+margin-top: 48px;
+padding: 25px 0;
+border-top: 1px solid var(--border);
+text-align: center;
+color: var(--muted);
+font-size: 13px;
+}
+
+.footer p + p {
+margin-top: 4px;
+}
+
+/* Mobile and tablet layouts */
+
+@media (max-width: 850px) {
+.nav-content {
+align-items: flex-start;
+flex-direction: column;
+}
+
+
+.nav-links {
+    gap: 15px;
+}
+
+.stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hero {
+    padding: 45px 30px;
+}
+
+
+}
+
+@media (max-width: 520px) {
+.stats-grid,
+.actions-grid {
+grid-template-columns: 1fr;
+}
+
+
+.hero {
+    padding: 35px 22px;
+}
+
+.nav-links {
+    gap: 12px;
+}
+
+
+}

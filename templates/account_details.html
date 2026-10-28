@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details - Project Kashi</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 35px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #0f766e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #115e59;
+        }
+
+        .details {
+            margin-top: 25px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .balance {
+            color: #0f766e;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #0f766e;
+            text-decoration: none;
+        }
+
+        @media (max-width: 500px) {
+            .row {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Project Kashi</h1>
+    <p>Account Details</p>
+</header>
+
+<div class="container">
+
+    <h2>Find an Account</h2>
+
+    <form method="GET" action="{{ url_for('account_details') }}">
+        <label for="account_id">Account ID</label>
+
+        <input
+            type="number"
+            id="account_id"
+            name="account_id"
+            min="1"
+            value="{{ account_id or '' }}"
+            placeholder="Enter Account ID"
+            required
+        >
+
+        <button type="submit">View Account</button>
+    </form>
+
+    {% if searched and account %}
+
+    <div class="details">
+        <h2>Account Information</h2>
+
+        <div class="row">
+            <span class="label">Account ID</span>
+            <span>{{ account.AccountID }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Account Number</span>
+            <span>{{ account.AccountNumber }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Account Type</span>
+            <span>{{ account.AccountType }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Opening Date</span>
+            <span>{{ account.OpeningDate }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Current Balance</span>
+            <span class="balance">₹{{ "%.2f"|format(account.Balance) }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Account Status</span>
+            <span>{{ account.Status }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Branch Name</span>
+            <span>{{ account.BranchName or 'Not available' }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Branch Location</span>
+            <span>{{ account.City or 'Not available' }}</span>
+        </div>
+    </div>
+
+    {% elif searched %}
+
+    <p>Account not found. Please check the Account ID.</p>
+
+    {% endif %}
+
+    <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+</div>
+
+</body>
+</html>

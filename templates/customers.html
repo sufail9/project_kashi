@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers | Project Kashi</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            background: #f3f6fb;
+            color: #243247;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #142d4e;
+            color: white;
+            padding: 24px 40px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d5e2f0;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 35px auto;
+            padding: 0 30px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+            font-size: 27px;
+            color: #142d4e;
+        }
+
+        .customer-count {
+            color: #52657b;
+            font-size: 14px;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 18px rgba(20, 45, 78, 0.08);
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1150px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead {
+            background: #eaf0f8;
+        }
+
+        th {
+            color: #142d4e;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 16px 14px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 17px 14px;
+            border-bottom: 1px solid #e8edf3;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #f7faff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .email {
+            min-width: 210px;
+            overflow-wrap: anywhere;
+        }
+
+        .account-number {
+            min-width: 170px;
+            white-space: nowrap;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .balance {
+            font-weight: 700;
+            color: #087f5b;
+            white-space: nowrap;
+        }
+
+        .status {
+            display: inline-block;
+            background: #d9f7e8;
+            color: #087443;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .no-account {
+            color: #7b8796;
+            font-style: italic;
+        }
+
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #087f8c;
+            color: white;
+            text-decoration: none;
+            padding: 12px 19px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #066873;
+        }
+
+        .btn-secondary {
+            background: #142d4e;
+        }
+
+        .btn-secondary:hover {
+            background: #203f65;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: #66758a;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 22px;
+            }
+
+            .container {
+                padding: 0 15px;
+                margin-top: 25px;
+            }
+
+            .table-card {
+                padding: 12px;
+            }
+
+            .page-heading h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Project Kashi</h1>
+        <p>Customer and Account Management</p>
+    </header>
+
+    <main class="container">
+
+        <div class="page-heading">
+            <h2>Registered Customers</h2>
+
+            <span class="customer-count">
+                Customer records: {{ customers | length }}
+            </span>
+        </div>
+
+        <div class="table-card">
+            <div class="table-container">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Mobile</th>
+                            <th>Email Address</th>
+                            <th>Account Number</th>
+                            <th>Account Type</th>
+                            <th>Balance (INR)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer.CustomerID }}</td>
+
+                            <td class="customer-name">
+                                {{ customer.FirstName }}
+                                {{ customer.LastName }}
+                            </td>
+
+                            <td>{{ customer.Mobile }}</td>
+
+                            <td class="email">
+                                {{ customer.Email or '-' }}
+                            </td>
+
+                            <td class="account-number">
+                                {% if customer.AccountNumber %}
+                                    {{ customer.AccountNumber }}
+                                {% else %}
+                                    <span class="no-account">No account</span>
+                                {% endif %}
+                            </td>
+
+                            <td>{{ customer.AccountType or '-' }}</td>
+
+                            <td class="balance">
+                                {% if customer.Balance is not none %}
+                                    ₹{{ "{:,.2f}".format(customer.Balance) }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if customer.Status == 'Active' %}
+                                    <span class="status">Active</span>
+                                {% elif customer.Status %}
+                                    {{ customer.Status }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="empty-message">
+                                No customers registered yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">
+                ← Back to Homepage
+            </a>
+
+            <a href="{{ url_for('register') }}" class="btn">
+                + Register Customer
+            </a>
+
+            <a href="{{ url_for('open_account') }}" class="btn">
+                + Open Account
+            </a>
+        </div>
+
+    </main>
+
+</body>
+</html>

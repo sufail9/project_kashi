@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Register Customer | Project Kashi</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+    .registration-section {
+        max-width: 850px;
+        margin: 40px auto;
+    }
+
+    .form-card {
+        background: #ffffff;
+        border: 1px solid #e3e9f1;
+        border-radius: 16px;
+        padding: 35px;
+        box-shadow: 0 8px 25px rgba(20, 43, 74, 0.05);
+    }
+
+    .form-header {
+        margin-bottom: 28px;
+    }
+
+    .form-header h1 {
+        color: #142b4a;
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+    .form-header p {
+        color: #718096;
+        font-size: 14px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        color: #243247;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #d7e0eb;
+        border-radius: 8px;
+        background: #ffffff;
+        color: #243247;
+        font: inherit;
+        outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #0d9488;
+        box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 90px;
+    }
+
+    .required {
+        color: #dc2626;
+    }
+
+    .form-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 28px;
+    }
+
+    .cancel-link {
+        color: #718096;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .cancel-link:hover {
+        color: #0d9488;
+    }
+
+    @media (max-width: 600px) {
+        .registration-section {
+            margin: 25px auto;
+        }
+
+        .form-card {
+            padding: 22px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full-width {
+            grid-column: auto;
+        }
+
+        .form-actions {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+    <div class="container nav-content">
+
+        <a href="/" class="logo">Project <span>Kashi.</span></a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/register">Register Customer</a>
+        </div>
+
+    </div>
+</nav>
+
+<main class="container registration-section">
+
+    <div class="form-card">
+
+        <div class="form-header">
+            <h1>Register a Customer</h1>
+            <p>Enter the customer's details to create a customer record.</p>
+        </div>
+
+        <form action="/register" method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="first_name">
+                        First Name <span class="required">*</span>
+                    </label>
+
+                    <input type="text"
+                           id="first_name"
+                           name="first_name"
+                           maxlength="50"
+                           autocomplete="given-name"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">
+                        Last Name <span class="required">*</span>
+                    </label>
+
+                    <input type="text"
+                           id="last_name"
+                           name="last_name"
+                           maxlength="50"
+                           autocomplete="family-name"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+
+                    <input type="date"
+                           id="dob"
+                           name="dob">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+
+                    <select id="gender" name="gender">
+                        <option value="">Select an option</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">
+                            Prefer not to say
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">
+                        Mobile Number <span class="required">*</span>
+                    </label>
+
+                    <input type="tel"
+                           id="mobile"
+                           name="mobile"
+                           maxlength="15"
+                           autocomplete="tel"
+                           pattern="[0-9+() -]{7,15}"
+                           title="Enter a valid mobile number"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           maxlength="100"
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="address">Address</label>
+
+                    <textarea id="address"
+                              name="address"
+                              maxlength="255"
+                              autocomplete="street-address"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="city">City</label>
+
+                    <input type="text"
+                           id="city"
+                           name="city"
+                           maxlength="50"
+                           autocomplete="address-level2">
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-accent">
+                    Register Customer →
+                </button>
+
+                <a href="/" class="cancel-link">Cancel</a>
+            </div>
+
+            <p style="margin-top: 18px; color: #718096; font-size: 12px;">
+                Fields marked with * are required.
+            </p>
+
+        </form>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>© 2026 Project Kashi | Educational Banking Project</p>
+    <p>All monetary values are displayed in Indian Rupees (₹ INR).</p>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Project Kashi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 25px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.07);
+            border-left: 5px solid #0f766e;
+        }
+
+        .card h3 {
+            margin: 0 0 15px;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .value {
+            font-size: 27px;
+            font-weight: bold;
+            color: #0f172a;
+            overflow-wrap: anywhere;
+        }
+
+        .currency {
+            color: #0f766e;
+        }
+
+        .section-title {
+            margin-top: 35px;
+            margin-bottom: 18px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #0f766e;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #115e59;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .actions {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cards,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .value {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Project Kashi</h1>
+    <p>Banking Management Dashboard</p>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h2>Welcome to the Dashboard 👋</h2>
+        <p>Overview of your banking database and transactions.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <div class="value">{{ total_customers }}</div>
+        </div>
+
+        <div class="card">
+            <h3>Total Accounts</h3>
+            <div class="value">{{ total_accounts }}</div>
+        </div>
+
+        <div class="card">
+            <h3>Total Active Account Balance</h3>
+            <div class="value currency">
+                ₹{{ "{:,.2f}".format(total_balance) }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Total Successful Deposits</h3>
+            <div class="value currency">
+                ₹{{ "{:,.2f}".format(total_deposits) }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Total Successful Withdrawals</h3>
+            <div class="value currency">
+                ₹{{ "{:,.2f}".format(total_withdrawals) }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Total Transactions</h3>
+            <div class="value">{{ total_transactions }}</div>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Quick Actions</h2>
+
+    <div class="actions">
+        <a href="{{ url_for('home') }}" class="btn">Home</a>
+
+        <a href="{{ url_for('customer_details') }}" class="btn">
+            Customer Details
+        </a>
+
+        <a href="{{ url_for('account_details') }}" class="btn">
+            Account Details
+        </a>
+
+        <a href="{{ url_for('transaction_history') }}" class="btn">
+            Transaction History
+        </a>
+
+        <a href="{{ url_for('deposit_money') }}" class="btn">
+            Deposit Money
+        </a>
+
+        <a href="{{ url_for('withdraw_money') }}" class="btn">
+            Withdraw Money
+        </a>
+    </div>
+
+</div>
+
+<div class="footer">
+    Project Kashi | Banking Management System
+</div>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details - Project Kashi</title>
+
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+    }
+
+    header {
+        background: #0f172a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 35px auto;
+        padding: 25px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 12px 20px;
+        background: #0f766e;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #115e59;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 14px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .back {
+        display: inline-block;
+        margin-top: 25px;
+        color: #0f766e;
+        text-decoration: none;
+    }
+
+    .message {
+        margin-top: 20px;
+        padding: 12px;
+        background: #fef3c7;
+        border-radius: 6px;
+    }
+
+    @media (max-width: 500px) {
+        .row {
+            flex-direction: column;
+            gap: 5px;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<header>
+    <h1>Project Kashi</h1>
+    <p>Customer Details</p>
+</header>
+
+<div class="container">
+
+
+<h2>Find a Customer</h2>
+
+<form method="GET" action="{{ url_for('customer_details') }}">
+    <label for="customer_id">Customer ID</label>
+
+    <input
+        type="number"
+        id="customer_id"
+        name="customer_id"
+        min="1"
+        value="{{ customer_id or '' }}"
+        placeholder="Enter Customer ID"
+        required
+    >
+
+    <button type="submit">View Customer</button>
+</form>
+
+{% if searched and customer %}
+
+    <h2>Customer Information</h2>
+
+    <div class="row">
+        <span class="label">Customer ID</span>
+        <span>{{ customer.CustomerID }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Full Name</span>
+        <span>{{ customer.FirstName }} {{ customer.LastName }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Date of Birth</span>
+        <span>{{ customer.DateOfBirth or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Gender</span>
+        <span>{{ customer.Gender or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Mobile Number</span>
+        <span>{{ customer.Mobile or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Email</span>
+        <span>{{ customer.Email or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Address</span>
+        <span>{{ customer.Address or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">City</span>
+        <span>{{ customer.City or '-' }}</span>
+    </div>
+
+    <div class="row">
+        <span class="label">Registration Date</span>
+        <span>{{ customer.RegistrationDate or '-' }}</span>
+    </div>
+
+{% elif searched %}
+
+    <p class="message">
+        Customer not found. Please check the Customer ID.
+    </p>
+
+{% endif %}
+
+<a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+
+</div>
+
+</body>
+</html>
